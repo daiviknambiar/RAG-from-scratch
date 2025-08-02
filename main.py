@@ -63,7 +63,7 @@ Use only the following pieces of context to answer the question. Don't make up a
 stream = ollama.chat(
   model=LANGUAGE_MODEL,
   messages=[
-    {'role': 'system', 'content': instruction_prompt},
+    {'role': 'system', 'content': prompt},
     {'role': 'user', 'content': input_query},
   ],
   stream=True,
