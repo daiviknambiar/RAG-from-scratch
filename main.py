@@ -32,4 +32,14 @@ def cosine_similarity(a, b):
     return (dot_product) / (norm_a * norm_b)
 
 
-###--- Implement retrieval function ---###
+###--- Implement retrieval function ---###)
+def retrieve(query, top_n=3):
+    query_embedding = ollama.embed(model=EMBEDDING_MODEL, input=query)['embeddings'][0]
+
+    similarities = []
+    for chunk, embedding in vector_db: 
+        similarity = cosine_similarity(query_embedding, embedding)
+        similarities.append((chunk, similarity))
+    
+    similarities.sort(key=lambda x: x[1], reverse=True)
+    return similarities[:top_n]
