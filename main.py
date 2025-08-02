@@ -1,4 +1,4 @@
-###--- A Simple RAG Demo ---###
+
 import ollama
 
 
