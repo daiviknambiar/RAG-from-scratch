@@ -43,3 +43,18 @@ def retrieve(query, top_n=3):
     
     similarities.sort(key=lambda x: x[1], reverse=True)
     return similarities[:top_n]
+
+
+
+###--- Prompt Generate Response ---###
+input_query = input('Ask me a question: ')
+retrieved_knowledge = retrieve(input_query)
+
+print('retrieved_knowledge:')
+for chunk, similarity in retrieved_knowledge:
+    print(f" - (similarity: {similarity: .2f}) {chunk}")
+    
+prompt = f'''You are a helpful chatbot. 
+Use only the following pieces of context to answer the question. Don't make up any new information:
+{'\n'.join([f' - {chunk}' for chunk, similarity in retrieved_knowledge])}
+'''
